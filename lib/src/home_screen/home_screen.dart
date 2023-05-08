@@ -14,26 +14,17 @@ class HomeScreen extends StatelessWidget {
         //  backgroundColor: Colors.purple.shade100,
       body: DecoratedBox(
         decoration: const BoxDecoration(
-          image: DecorationImage(image: AssetImage('assets/images/logo.png'), fit: BoxFit.cover),
+          image: DecorationImage(image: AssetImage('assets/images/beautiful.jpg'), fit: BoxFit.cover),
 
         ),
-        // height: MediaQuery.of(context).size.height,
-        // width: MediaQuery.of(context).size.width,
-        child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              // const SizedBox(width: 30),
-              // Padding(
-              //   padding: const EdgeInsets.all(8.0),
-              //   child: Image.asset ('assets/images/logo.png',height: 200,scale:2.5),
-              // ),
-            
                Padding(
                  padding: const EdgeInsets.all(8.0),
                  child: SizedBox(
                     width: MediaQuery.of(context).size.width,
-                    height: 50,
+                    height: 70,
                    child: ElevatedButton(
                       onPressed: () {
                         debugPrint('you are going to play alone');
@@ -47,10 +38,7 @@ class HomeScreen extends StatelessWidget {
                               
                     ),
                  ),
-               ),
-              
-              // const SizedBox(width: 30),
-            
+               ),  
                  Padding(
                    padding: const EdgeInsets.all(8.0),
                    child: SizedBox(
@@ -89,7 +77,7 @@ class HomeScreen extends StatelessWidget {
         ),
 
 
-      ),
+     
 
       // This trailing comma makes auto-formatting nicer for build methods.
     );

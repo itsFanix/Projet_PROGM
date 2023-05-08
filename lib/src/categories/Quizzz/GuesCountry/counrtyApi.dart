@@ -22,19 +22,7 @@ class CountryApi {
 
     if (response.statusCode ==200) {
    
-
-      // Map data = jsonDecode(response.body);
-      // List _tmp=[];
-
-      // for(var e in data['feed']){
-      //   _tmp.add(e['content']['details']);
-      // } 
-      // return Country.countriesFromSnapshot(_tmp);
     return List<Country>.from(jsonDecode(response.body).map((data) => Country.fromJson(data)));
-
-   // return List<Country>.from(jsonDecode(response.body));
-    // for (var element in results) {debugPrint(element.name);}
-    //return results;
     }
   else {
     throw Exception('Failed to load Country');

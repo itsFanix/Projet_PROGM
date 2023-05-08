@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
-import 'package:projet_progm/src/categories/GuesCountry/GuesCountry.dart';
-import 'package:projet_progm/src/categories/GuesCountry/country_model.dart';
+import 'package:projet_progm/src/categories/Quizzz/GuesCountry/GuesCountry.dart';
+import 'package:projet_progm/src/categories/Quizzz/GuesCountry/country_model.dart';
+import 'package:projet_progm/src/categories/Quizzz/GuesCountry/endGame.dart';
+import 'package:projet_progm/src/categories/Quizzz/GuesMusic/GuesMusic.dart';
+import 'package:projet_progm/src/categories/Quizzz/quizz_screen.dart';
 import 'package:projet_progm/src/categories/categories_screen.dart';
-import 'package:projet_progm/src/categories/GuesCountry/LevelOne/LevelOneGuesCountry.dart';
+import 'package:projet_progm/src/categories/Quizzz/GuesCountry/LevelOne/LevelOneGuesCountry.dart';
 import 'package:projet_progm/src/home_screen/home_screen.dart';
 
 void main() {
@@ -25,30 +28,39 @@ Logger _log = Logger('main.dart');
 //The route configuration
 final GoRouter _router = GoRouter(routes: <RouteBase>[
   GoRoute(
-      path: "/",
-      builder: (BuildContext context, GoRouterState state) => const HomeScreen(),
+    path: "/",
+    builder: (BuildContext context, GoRouterState state) => const HomeScreen(),
   ),
-      
-   GoRoute(
-            path: "/categories",
-            builder:  (BuildContext context, GoRouterState state) => const CategoriesScreen(),
-          
-          ),
-     GoRoute(
-            path: "/guesCountry",
-            builder:  (BuildContext context, GoRouterState state) =>  GuesCountry(),
-          
-          ),
+  GoRoute(
+    path: "/categories",
+    builder: (BuildContext context, GoRouterState state) =>
+        const CategoriesScreen(),
+  ),
     GoRoute(
-             name :"levelOneGuesCountry",
-            path: "/levelOneGuesCountry",
-            builder:  (BuildContext context, GoRouterState state) =>  LevelOneGuesCountry(countries :  state.extra as List<Country>)
-            ),
-          
-  
-  
+    name : "quiz",
+    path: "/quiz",
+    builder: (BuildContext context, GoRouterState state) => const QuizScreen(),
+  ),
+  GoRoute(
+    path: "/guesCountry",
+    builder: (BuildContext context, GoRouterState state) => GuesCountry(),
+  ),
+    GoRoute(
+    path: "/guesMusic",
+    builder: (BuildContext context, GoRouterState state) => GuesMusic(),
+  ),
+  GoRoute(
+      name: "levelOneGuesCountry",
+      path: "/levelOneGuesCountry",
+      builder: (BuildContext context, GoRouterState state) =>
+          LevelOneGuesCountry(countries: state.extra as List<Country>)),
+  GoRoute(
+      name: "endGame",
+      path: "/endGame",
+      builder: (BuildContext context, GoRouterState state) =>
+          endGame(score: state.queryParams["score"]!)),
 ]);
- 
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   // This widget is the root of your application.
