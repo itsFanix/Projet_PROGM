@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
+import 'package:projet_progm/src/categories/Movements/PacManGame/PacMan.dart';
+import 'package:projet_progm/src/categories/Movements/movement_screen.dart';
 import 'package:projet_progm/src/categories/Quizzz/GuesCountry/GuesCountry.dart';
 import 'package:projet_progm/src/categories/Quizzz/GuesCountry/country_model.dart';
 import 'package:projet_progm/src/categories/Quizzz/GuesCountry/endGame.dart';
@@ -9,6 +11,7 @@ import 'package:projet_progm/src/categories/Quizzz/quizz_screen.dart';
 import 'package:projet_progm/src/categories/categories_screen.dart';
 import 'package:projet_progm/src/categories/Quizzz/GuesCountry/LevelOne/LevelOneGuesCountry.dart';
 import 'package:projet_progm/src/home_screen/home_screen.dart';
+import 'package:projet_progm/src/multiPlayer/wifiptop_screen.dart';
 
 void main() {
   // usign logger package to logg all information
@@ -29,7 +32,10 @@ Logger _log = Logger('main.dart');
 final GoRouter _router = GoRouter(routes: <RouteBase>[
   GoRoute(
     path: "/",
-    builder: (BuildContext context, GoRouterState state) => const HomeScreen(),
+         builder: (BuildContext context, GoRouterState state) => const HomeWifiPtoP(),
+
+    // builder: (BuildContext context, GoRouterState state) => const HomeScreen(),
+    // builder : (BuildContext context, GoRouterState state) => const PacManScreen(),
   ),
   GoRoute(
     path: "/categories",
@@ -59,6 +65,14 @@ final GoRouter _router = GoRouter(routes: <RouteBase>[
       path: "/endGame",
       builder: (BuildContext context, GoRouterState state) =>
           endGame(score: state.queryParams["score"]!)),
+
+  GoRoute(path: "/movement",
+    builder: (BuildContext context, GoRouterState state) => const MovementScreen()
+  ),
+   GoRoute(path: "/pacMan",
+    builder: (BuildContext context, GoRouterState state) => const PacManScreen()
+  ),
+  
 ]);
 
 class MyApp extends StatelessWidget {
@@ -67,6 +81,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       routerConfig: _router,
       title: 'Mysterius',
       theme: ThemeData(

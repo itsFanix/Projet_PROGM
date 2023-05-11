@@ -43,6 +43,8 @@ dependencies:
   flutter_svg: ^2.0.5
   dart_random_choice: ^0.2.0
   flame: ^1.7.0
+  flutter_p2p_connection: ^2.0.1
+  filesystem_picker: ^3.1.0
 
 dev_dependencies:
   flutter_test:

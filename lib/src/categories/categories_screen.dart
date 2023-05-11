@@ -69,6 +69,7 @@ class CategoriesScreen extends StatelessWidget {
                       child: const Center(
                         child: Text('Sensors', style: TextStyle(fontSize: 20)),
                       ))),
+
                   GestureDetector(
                      onTap:  () {context.go('/movement');} ,
                     child: Container(
@@ -87,6 +88,7 @@ class CategoriesScreen extends StatelessWidget {
                           style: TextStyle(fontSize: 20),
                         ),
                       ))),
+                      
                        GestureDetector(
                      onTap:  () {context.go('/movement');} ,
                     child: Container(

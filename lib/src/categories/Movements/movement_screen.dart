@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class QuizScreen extends StatelessWidget {
-  const QuizScreen({super.key});
+class MovementScreen extends StatelessWidget {
+  const MovementScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    const title = 'Quizzs';
+    const title = 'Movements';
     return Scaffold(
       extendBodyBehindAppBar: true,
         appBar: AppBar(
@@ -23,16 +23,16 @@ class QuizScreen extends StatelessWidget {
         ),
         //create a Grid of two row and 6 columns
         body: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
                     colors: [
-                  Colors.purple.shade800,
-                  Colors.purple.shade700,
-                  Colors.purple.shade600,
-                  Colors.purple.shade500,
-                  Colors.purple.shade400,
+                  Color(0xFF701ebd),
+                  Color(0xFF873bcc),
+                  Color(0xFFfe4a97),
+                  Color(0xFFe17763),
+                  Color(0xFF68998c),
                 ])),
             child: Padding(
               padding: const EdgeInsets.all(5.0),
@@ -40,11 +40,11 @@ class QuizScreen extends StatelessWidget {
                 children: [
                   GestureDetector(
                       onTap: () {
-                        context.go('/guesCountry');
+                        context.go('/pacMan');
                       },
                       child: Container(
                           margin: const EdgeInsets.all(25),
-                          height:MediaQuery.of(context).size.height/3,
+                          height:MediaQuery.of(context).size.height/7,
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                                 begin: Alignment.topRight,
@@ -62,36 +62,36 @@ class QuizScreen extends StatelessWidget {
                           ),
                           width: MediaQuery.of(context).size.width,
                           child: const Center(
-                            child: Text('Countries Quizzzz',
+                            child: Text('Start',
                                 style: TextStyle(fontSize: 30)),
                           ))),
-                  GestureDetector(
-                      onTap: () {
-                        context.go('/guesMusic');
-                      },
-                      child: Container(
-                          margin: const EdgeInsets.all(25),
-                          height: MediaQuery.of(context).size.height/3,
-                          decoration: BoxDecoration(
-                                 gradient: LinearGradient(
-                                begin: Alignment.topRight,
-                                end: Alignment.bottomLeft,
-                                colors: [
-                                  Color.fromARGB(255, 163, 143, 143).withBlue(25),
-                                  Color.fromARGB(255, 62, 199, 204),
-                                  Colors.white.withBlue(5),
-                                  Color.fromARGB(255, 53, 155, 185).withBlue(25),
-                                  Color.fromARGB(255, 131, 86, 86).withBlue(25),
-                                ]),
-                            border: Border.all(width: 3),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(10)),
-                          ),
-                          width: MediaQuery.of(context).size.width,
-                          child: const Center(
-                            child: Text('Music  Quizzzz',
-                                style: TextStyle(fontSize: 30)),
-                          ))),
+                  // GestureDetector(
+                  //     onTap: () {
+                  //       context.go('/guesMusic');
+                  //     },
+                  //     child: Container(
+                  //         margin: const EdgeInsets.all(25),
+                  //         height: MediaQuery.of(context).size.height/3,
+                  //         decoration: BoxDecoration(
+                  //                gradient: LinearGradient(
+                  //               begin: Alignment.topRight,
+                  //               end: Alignment.bottomLeft,
+                  //               colors: [
+                  //                 Color.fromARGB(255, 163, 143, 143).withBlue(25),
+                  //                 Color.fromARGB(255, 62, 199, 204),
+                  //                 Colors.white.withBlue(5),
+                  //                 Color.fromARGB(255, 53, 155, 185).withBlue(25),
+                  //                 Color.fromARGB(255, 131, 86, 86).withBlue(25),
+                  //               ]),
+                  //           border: Border.all(width: 3),
+                  //           borderRadius:
+                  //               const BorderRadius.all(Radius.circular(10)),
+                  //         ),
+                  //         width: MediaQuery.of(context).size.width,
+                  //         child: const Center(
+                  //           child: Text('Music  Quizzzz',
+                  //               style: TextStyle(fontSize: 30)),
+                  //         ))),
                 ],
               ),
             )));
