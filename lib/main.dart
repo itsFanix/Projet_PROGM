@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
-import 'package:projet_progm/src/categories/Movements/PacManGame/PacMan.dart';
+import 'package:projet_progm/src/categories/Movements/pacManGame/PacMan.dart';
 import 'package:projet_progm/src/categories/Movements/movement_screen.dart';
-import 'package:projet_progm/src/categories/Quizzz/GuesCountry/GuesCountry.dart';
-import 'package:projet_progm/src/categories/Quizzz/GuesCountry/country_model.dart';
-import 'package:projet_progm/src/categories/Quizzz/GuesCountry/endGame.dart';
-import 'package:projet_progm/src/categories/Quizzz/GuesMusic/GuesMusic.dart';
+import 'package:projet_progm/src/categories/Quizzz/guesCountry/GuesCountry.dart';
+import 'package:projet_progm/src/categories/Quizzz/guesCountry/country_model.dart';
+import 'package:projet_progm/src/categories/Quizzz/guesCountry/endGame.dart';
+import 'package:projet_progm/src/categories/Quizzz/guesMusic/GuesMusic.dart';
 import 'package:projet_progm/src/categories/Quizzz/quizz_screen.dart';
 import 'package:projet_progm/src/categories/categories_screen.dart';
-import 'package:projet_progm/src/categories/Quizzz/GuesCountry/LevelOne/LevelOneGuesCountry.dart';
+import 'package:projet_progm/src/categories/Quizzz/guesCountry/LevelOne/LevelOneGuesCountry.dart';
+import 'package:projet_progm/src/categories/movements/bubbleGame/BubbleGame.dart';
+import 'package:projet_progm/src/categories/movements/collectFruits/CollectFruits.dart';
+import 'package:projet_progm/src/categories/sensors/ballMov.dart/MoveBall.dart';
+import 'package:projet_progm/src/categories/sensors/ballMov.dart/MoveBallTwo.dart';
+import 'package:projet_progm/src/categories/sensors/ballMov.dart/SuperBall.dart';
+import 'package:projet_progm/src/categories/sensors/sensors_screen.dart';
 import 'package:projet_progm/src/home_screen/home_screen.dart';
 import 'package:projet_progm/src/multiPlayer/wifiptop_screen.dart';
 
@@ -32,10 +38,10 @@ Logger _log = Logger('main.dart');
 final GoRouter _router = GoRouter(routes: <RouteBase>[
   GoRoute(
     path: "/",
-         builder: (BuildContext context, GoRouterState state) => const HomeWifiPtoP(),
-
+        //  builder: (BuildContext context, GoRouterState state) => const HomeWifiPtoP(),
     // builder: (BuildContext context, GoRouterState state) => const HomeScreen(),
-    // builder : (BuildContext context, GoRouterState state) => const PacManScreen(),
+builder: (BuildContext context, GoRouterState state) => const SuperBall(),
+
   ),
   GoRoute(
     path: "/categories",
@@ -72,7 +78,21 @@ final GoRouter _router = GoRouter(routes: <RouteBase>[
    GoRoute(path: "/pacMan",
     builder: (BuildContext context, GoRouterState state) => const PacManScreen()
   ),
-  
+    GoRoute(path: "/collect",
+    builder: (BuildContext context, GoRouterState state) => const CollectFruits()
+  ),
+
+   GoRoute(path: "/bubble",
+    builder: (BuildContext context, GoRouterState state) => const BubbleScreen()
+  ),
+  GoRoute(
+    path: "/sensor",
+    builder:(BuildContext context, GoRouterState state)  => const SensorsScreen()
+  ),
+    GoRoute(
+    path: "/moveBall",
+    builder:(BuildContext context, GoRouterState state)  => const SuperBall()
+  )
 ]);
 
 class MyApp extends StatelessWidget {

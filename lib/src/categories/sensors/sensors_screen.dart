@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class MovementScreen extends StatelessWidget {
-  const MovementScreen({super.key});
+class SensorsScreen extends StatelessWidget {
+  const SensorsScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    const title = 'Movements';
+    const title = 'Sensors';
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
@@ -24,23 +24,24 @@ class MovementScreen extends StatelessWidget {
         //create a Grid of two row and 6 columns
         body: Container(
             decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topRight,
-                    end: Alignment.bottomLeft,
-                    colors: [
-                  Color(0xFF701ebd),
-                  Color(0xFF873bcc),
-                  Color(0xFFfe4a97),
-                  Color(0xFFe17763),
-                  Color(0xFF68998c),
-                ])),
+              image: DecorationImage(image: AssetImage('assets/images/gameOneBack.jpg'), fit: BoxFit.cover, opacity:100),),
+                // gradient: LinearGradient(
+                //     begin: Alignment.topRight,
+                //     end: Alignment.bottomLeft,
+                //     colors: [
+                //   Color(0xFF701ebd),
+                //   Color(0xFF873bcc),
+                //   Color(0xFFfe4a97),
+                //   Color(0xFFe17763),
+                //   Color(0xFF68998c),
+                // ])),
             child: Padding(
               padding: const EdgeInsets.all(5.0),
               child: ListView(
                 children: [
                   GestureDetector(
                       onTap: () {
-                        context.go('/pacMan');
+                        context.go('/moveBall');
                       },
                       child: Container(
                           margin: const EdgeInsets.all(25),
@@ -66,7 +67,7 @@ class MovementScreen extends StatelessWidget {
                           width: MediaQuery.of(context).size.width,
                           child: const Center(
                             child:
-                                Text('Start', style: TextStyle(fontSize: 30)),
+                                Text('Ball Move', style: TextStyle(fontSize: 30)),
                           ))),
                   GestureDetector(
                       onTap: () {
@@ -96,39 +97,7 @@ class MovementScreen extends StatelessWidget {
                           width: MediaQuery.of(context).size.width,
                           child: const Center(
                             child:
-                                Text('CollectFruitStart', style: TextStyle(fontSize: 30)),
-                          ))),
-
-
-                            GestureDetector(
-                      onTap: () {
-                        context.go('/bubble');
-                      },
-                      child: Container(
-                          margin: const EdgeInsets.all(25),
-                          height: MediaQuery.of(context).size.height / 7,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                                begin: Alignment.topRight,
-                                end: Alignment.bottomLeft,
-                                colors: [
-                                  const Color.fromARGB(255, 163, 143, 143)
-                                      .withBlue(25),
-                                  const Color.fromARGB(255, 62, 199, 204),
-                                  Colors.white.withBlue(5),
-                                  const Color.fromARGB(255, 53, 155, 185)
-                                      .withBlue(25),
-                                  const Color.fromARGB(255, 131, 86, 86)
-                                      .withBlue(25),
-                                ]),
-                            border: Border.all(width: 3),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(10)),
-                          ),
-                          width: MediaQuery.of(context).size.width,
-                          child: const Center(
-                            child:
-                                Text('BubbleGameStart', style: TextStyle(fontSize: 30)),
+                                Text('Start', style: TextStyle(fontSize: 30)),
                           ))),
                 ],
               ),

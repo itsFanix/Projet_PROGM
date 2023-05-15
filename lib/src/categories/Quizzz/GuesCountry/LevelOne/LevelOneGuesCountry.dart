@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 
-import 'package:projet_progm/src/categories/Quizzz/GuesCountry/LevelOne/responseWidget.dart';
+import 'package:projet_progm/src/categories/Quizzz/guesCountry/LevelOne/responseWidget.dart';
 import '../country_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

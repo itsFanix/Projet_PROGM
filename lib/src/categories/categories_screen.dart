@@ -7,8 +7,10 @@ class CategoriesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const title = ' Categories';
     return Scaffold(
+      extendBodyBehindAppBar: true,
         appBar: AppBar(
-          backgroundColor: Colors.purple.shade400,
+          
+          backgroundColor: Colors.transparent,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios_new_outlined,
                 color: Colors.white),
@@ -22,17 +24,10 @@ class CategoriesScreen extends StatelessWidget {
         ),
         //create a Grid of two row and 6 columns
         body: Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topRight,
-                    end: Alignment.bottomLeft,
-                    colors: [
-                  Colors.purple.shade800,
-                  Colors.purple.shade700,
-                  Colors.purple.shade600,
-                  Colors.purple.shade500,
-                  Colors.purple.shade400,
-                ])),
+            decoration: const BoxDecoration(
+              image: DecorationImage(image: AssetImage('assets/images/backtwo.jpg'), fit: BoxFit.cover,opacity: 100),
+               
+                ),
             child: Padding(
               padding: const EdgeInsets.all(5.0),
               child: ListView(

@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:projet_progm/src/categories/Movements/PacManGame/path.dart';
-import 'package:projet_progm/src/categories/Movements/PacManGame/pixel.dart';
-import 'package:projet_progm/src/categories/Movements/PacManGame/player.dart';
+import 'package:projet_progm/src/categories/Movements/pacManGame/path.dart';
+import 'package:projet_progm/src/categories/Movements/pacManGame/pixel.dart';
+import 'package:projet_progm/src/categories/Movements/pacManGame/player.dart';
 
 class PacManScreen extends StatefulWidget {
   const PacManScreen({super.key});
@@ -152,7 +152,7 @@ class _PacManScreenState extends State<PacManScreen> {
     preGame = false;
     getFood();
     startTimer();
-    Timer.periodic(const Duration(milliseconds: 120), (timer) {
+    Timer.periodic(const Duration(milliseconds: 400), (timer) {
       if (_seconds == 0) {
         print("End of This Game");
         //  stopTimer();
@@ -317,11 +317,13 @@ class _PacManScreenState extends State<PacManScreen> {
                               // child: Text(index.toString())
                             );
                           } else if (food.contains(index) || preGame) {
-                            return const MyPath(
+                            return MyPath(
                                 innerColor: Color.fromARGB(255, 241, 243, 242),
                                 outerColor: Colors.blueGrey,
-                                child: Icon(Icons.apple,
-                                    size: 25, color: Colors.grey));
+                                child : Image.asset('assets/images/strawberry.png'),
+                                // child: Icon(Icons.apple,
+                                    // size: 25, color: Colors.grey)
+                                    );
                           } else {
                             return const MyPath(
                               innerColor: Colors.blueGrey,
