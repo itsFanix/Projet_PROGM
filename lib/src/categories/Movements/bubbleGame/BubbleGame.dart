@@ -7,6 +7,7 @@ import 'package:projet_progm/src/categories/movements/bubbleGame/ball.dart';
 import 'package:projet_progm/src/categories/movements/bubbleGame/bottom.dart';
 import 'package:projet_progm/src/categories/movements/bubbleGame/player.dart';
 
+
 import 'missile.dart';
 
 
@@ -176,6 +177,7 @@ void _showDialog(){
       actions: [
        TextButton(
               onPressed: () => setState(() {
+                resetGame();
               }),
               child: const Text('R E S T A R T'),
             ),
@@ -184,7 +186,33 @@ void _showDialog(){
    }
    
    );
+
+     Timer(const Duration(seconds: 2), () {
+context.go('/guesCountry');
+   } );
  
+}
+
+
+void resetGame(){
+  setState(() {
+    Navigator.pop(context); //dismiss
+    score=0;
+ playerX=0;
+
+
+
+missileX= playerX;
+
+ missileHeight=10;
+ midShot=false;
+
+ ballX=0.5;
+ ballY=1;
+
+  ballDirection=direction.LEFT;
+
+  });
 
 }
 bool playerDies(){
@@ -239,6 +267,21 @@ bool playerDies(){
             color: Colors.grey,
             child:
                 Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+
+                  GestureDetector(
+                onTap: () => context.go('/challenge'),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    color: Colors.grey[100],
+                    width: 40,
+                    height: 40,
+                    child: const Center(
+                      child: Icon(Icons.arrow_back_ios, size: 30,),
+                    ),
+                  ),
+                ),
+              ),
               MyBottom(icon: Icons.play_arrow,
               function: startGame,
               ),

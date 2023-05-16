@@ -24,16 +24,8 @@ class QuizScreen extends StatelessWidget {
         //create a Grid of two row and 6 columns
         body: Container(
             decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topRight,
-                    end: Alignment.bottomLeft,
-                    colors: [
-                  Colors.purple.shade800,
-                  Colors.purple.shade700,
-                  Colors.purple.shade600,
-                  Colors.purple.shade500,
-                  Colors.purple.shade400,
-                ])),
+              image: DecorationImage(image: AssetImage('assets/images/quizBack.jpg'), fit: BoxFit.cover, opacity:100)
+            ),
             child: Padding(
               padding: const EdgeInsets.all(5.0),
               child: ListView(
@@ -44,18 +36,10 @@ class QuizScreen extends StatelessWidget {
                       },
                       child: Container(
                           margin: const EdgeInsets.all(25),
-                          height:MediaQuery.of(context).size.height/3,
+                          height:MediaQuery.of(context).size.height/6,
                           decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                                begin: Alignment.topRight,
-                                end: Alignment.bottomLeft,
-                                colors: [
-                                  const Color.fromARGB(255, 163, 143, 143).withBlue(25),
-                                  const Color.fromARGB(255, 62, 199, 204),
-                                  Colors.white.withBlue(5),
-                                  const Color.fromARGB(255, 53, 155, 185).withBlue(25),
-                                  const Color.fromARGB(255, 131, 86, 86).withBlue(25),
-                                ]),
+                           
+                                
                             border: Border.all(width: 3),
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(10)),
@@ -71,18 +55,9 @@ class QuizScreen extends StatelessWidget {
                       },
                       child: Container(
                           margin: const EdgeInsets.all(25),
-                          height: MediaQuery.of(context).size.height/3,
+                          height: MediaQuery.of(context).size.height/6,
                           decoration: BoxDecoration(
-                                 gradient: LinearGradient(
-                                begin: Alignment.topRight,
-                                end: Alignment.bottomLeft,
-                                colors: [
-                                  Color.fromARGB(255, 163, 143, 143).withBlue(25),
-                                  Color.fromARGB(255, 62, 199, 204),
-                                  Colors.white.withBlue(5),
-                                  Color.fromARGB(255, 53, 155, 185).withBlue(25),
-                                  Color.fromARGB(255, 131, 86, 86).withBlue(25),
-                                ]),
+                                
                             border: Border.all(width: 3),
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(10)),
@@ -90,6 +65,25 @@ class QuizScreen extends StatelessWidget {
                           width: MediaQuery.of(context).size.width,
                           child: const Center(
                             child: Text('Music  Quizzzz',
+                                style: TextStyle(fontSize: 30)),
+                          ))),
+
+                           GestureDetector(
+                      onTap: () {
+                        context.go('/randomQuiz');
+                      },
+                      child: Container(
+                          margin: const EdgeInsets.all(25),
+                          height: MediaQuery.of(context).size.height/6,
+                          decoration: BoxDecoration(
+                                
+                            border: Border.all(width: 3),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10)),
+                          ),
+                          width: MediaQuery.of(context).size.width,
+                          child: const Center(
+                            child: Text('Question Quiz',
                                 style: TextStyle(fontSize: 30)),
                           ))),
                 ],

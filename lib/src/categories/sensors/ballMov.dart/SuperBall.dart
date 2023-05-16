@@ -3,10 +3,12 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:projet_progm/src/categories/sensors/ballMov.dart/Player.dart';
 import 'package:projet_progm/src/categories/sensors/ballMov.dart/Target.dart';
+
 import 'package:sensors_plus/sensors_plus.dart';
 
 class SuperBall extends StatefulWidget{
@@ -28,7 +30,9 @@ class _SuperBallState extends State<SuperBall> {
   //Accelerometer
  AccelerometerEvent? event;
  StreamSubscription? accel;
-
+ Timer? countdownTimer;
+ int _seconds = 30;
+ final audioplayer=  AudioPlayer();
 
 
 moveball(AccelerometerEvent event){
@@ -38,41 +42,26 @@ moveball(AccelerometerEvent event){
   setState(() {
      var reduisX = event.x/100;
      var reduisY= event.y/100;
-    if(posX+ reduisX < 1) {
-      if(posY -reduisY> -1){
-        print((posY-reduisY).toString() + "reduis" + reduisX.toString());
-    posX+=  reduisX;
-     posY -=reduisY;
-      }
-      
+     var  resX= posX + reduisX;
+     var resY= posY + reduisY;
+
+    if( -1 < resX && resX< 1) {
+    posX =resX  ;
+    }
+    if(-1 < resY && resY <1){
+       posY = resY;
     }
 
-    // if(posY -reduis >-1){
-    //   posY-=reduis;
-    // }
-    // if(posX-reduis >-1){
-    //   posX -=reduis;
-    // }
-    // print("acel" + event.toString() + " POSX" + posX.toString());
+   
   });
-  // setState(() {
-  //    var reduis = event.x/10;
-  //   if(posX-reduis > -1){
-  //     posX -= reduis;
-  //     print("PosX:::: " + posX.toString());
-  //   }
-  // });
-
-//  setState(() {
-//     posY += event.y;
-//  });
-
 
 
 }
   void startGame() {
 
 //Subscribe to accelerometer event
+audioplayer.play(AssetSource('audios/gameSong.mp3'));
+startTimer();
     if(accel==null){
     accel= accelerometerEvents.listen((eve) {
       setState(() {
@@ -83,9 +72,16 @@ moveball(AccelerometerEvent event){
   else{
     accel!.resume();
   }
-
+    
   Timer.periodic(const Duration(milliseconds: 200), (timer){
     moveball(event!);
+    touchTarget();
+      if (_seconds == 0) {
+        timer.cancel();
+        _showDialog();
+        audioplayer.stop();
+       
+      }
   
   }
   
@@ -93,6 +89,74 @@ moveball(AccelerometerEvent event){
 
 
   }
+
+  void touchTarget(){
+    if((posX - targetX)< 0.02 && (posY -targetY) <0.02){
+      print("yes");
+       targetX= Random().nextDouble() * 2 - 1;
+   targetY= Random().nextDouble() * 2 - 1;
+   score ++;
+
+     
+    }
+  }
+
+    
+
+  void startTimer() {
+    countdownTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        if (_seconds > 0) {
+          _seconds--;
+        }
+        else{
+          timer.cancel();
+        }
+      });
+    });
+  }
+@override
+void initState() {
+    
+    super.initState();
+  }
+
+void resetGame(){
+  setState(() {
+    Navigator.pop(context); //dismiss
+    score=0;
+    _seconds = 30;
+    posX= Random().nextDouble() * 2 - 1;
+    posY= Random().nextDouble() * 2 - 1;
+       targetX= Random().nextDouble() * 2 - 1;
+   targetY= Random().nextDouble() * 2 - 1;
+
+  });
+
+}
+
+void _showDialog(){
+  showDialog(context: context,
+   builder: (BuildContext context){
+    return  AlertDialog(
+      backgroundColor: Colors.blueGrey,
+      title: const Text("Time up ", style: TextStyle(color: Colors.white),),
+      content: Text("score : $score", style: const TextStyle(color: Colors.white, fontSize: 25)),
+      actions: [
+       TextButton(
+              onPressed: () => resetGame(),
+              child: const Text('R E S T A R T'),
+            ),
+      ],
+    );
+   }
+   
+   );
+      Timer(const Duration(seconds: 2), () {
+context.go('/bubble');
+   } );
+ 
+}
 
   @override
   void dispose() {
@@ -110,7 +174,7 @@ moveball(AccelerometerEvent event){
             children: [
               //back to the menu
               GestureDetector(
-                onTap: () => context.go('/sensor'),
+                onTap: () => context.go('/challenge'),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
@@ -131,6 +195,25 @@ moveball(AccelerometerEvent event){
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   )),
 
+                    Row(
+                    children: [
+                      const Icon(
+                        Icons.access_time,
+                        color: Colors.white,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          _seconds.toString(),
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                        ),
+                      ),
+                    ],
+                  ),
+
               Row(
                 children: [
                   Text(
@@ -138,7 +221,9 @@ moveball(AccelerometerEvent event){
                     style: const TextStyle(color: Colors.white, fontSize: 20),
                   )
                 ],
-              )
+              ),
+
+             
             ],),
 
       )),
@@ -146,15 +231,14 @@ moveball(AccelerometerEvent event){
       Expanded(
         flex: 3,
         child: Container(
-          color: Colors.green,
+         decoration: const BoxDecoration(
+          image: DecorationImage(image: AssetImage('assets/images/paysage2.jpg'), fit: BoxFit.cover, opacity:100),
+         ),
           child: Stack(
             children: [
-              //  Target(targetX: targetX, targetY: targetY, color: Colors.amberAccent),
+               Target(targetX: targetX, targetY: targetY, color: Colors.amberAccent),
               Player(posX: posX, posY: posY),
-              // Target(
-              //   targetX: targetX,
-              //   targetY: targetY,
-              // )
+            
             ],
           ),
         ),

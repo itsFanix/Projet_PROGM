@@ -5,15 +5,16 @@ import 'package:filesystem_picker/filesystem_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_p2p_connection/flutter_p2p_connection.dart';
+import 'package:go_router/go_router.dart';
 
-class HomeWifiPtoP extends StatefulWidget {
-  const HomeWifiPtoP({super.key});
+class HomeWifiPtoP2 extends StatefulWidget {
+  const HomeWifiPtoP2({super.key});
 
   @override
-  State<HomeWifiPtoP> createState() => _HomeWifiPtoPState();
+  State<HomeWifiPtoP2> createState() => _HomeWifiPtoP2State();
 }
 
-class _HomeWifiPtoPState extends State<HomeWifiPtoP>
+class _HomeWifiPtoP2State extends State<HomeWifiPtoP2>
     with WidgetsBindingObserver {
 
   final TextEditingController msgText = TextEditingController(); //
@@ -111,7 +112,7 @@ class _HomeWifiPtoPState extends State<HomeWifiPtoP>
             }
           },
           receiveString: (req) async {
-            snack(req);
+            context.go(req);
           });
     }
   }
@@ -124,24 +125,11 @@ class _HomeWifiPtoPState extends State<HomeWifiPtoP>
   }
 
   Future sendMessage() async {
-    _flutterP2PConnectionPlugin.sendStringToSocket(msgText.text);
+  //  _flutterP2PConnectionPlugin.
+    _flutterP2PConnectionPlugin.sendStringToSocket( "/collect");
   }
 
-  Future sendFile(bool phone) async {
-    String? filePath = await FilesystemPicker.open(
-        context: context,
-        rootDirectory: Directory(phone ? "/storage/emulated/0" : "storage"),
-        fsType: FilesystemType.file,
-        fileTileSelectMode: FileTileSelectMode.wholeTile,
-        showGoUp: true,
-        folderIconColor: Colors.blue);
-    if (filePath == null) return;
-    List<TransferUpdate>? updates =
-        await _flutterP2PConnectionPlugin.sendFiletoSocket([
-      filePath,
-    ]);
-    print(updates);
-  }
+  
 
   void snack(String msg) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -384,18 +372,25 @@ class _HomeWifiPtoPState extends State<HomeWifiPtoP>
               },
               child: const Text("send msg"),
             ),
-            ElevatedButton(
+               ElevatedButton(
               onPressed: () async {
-                sendFile(true);
+                sendMessage();
+                context.go('/collect');
               },
-              child: const Text("send File from phone"),
+              child: const Text("playGame"),
             ),
-            ElevatedButton(
-              onPressed: () async {
-                sendFile(false);
-              },
-              child: const Text("send File"),
-            ),
+            // ElevatedButton(
+            //   onPressed: () async {
+            //     sendFile(true);
+            //   },
+            //   child: const Text("send File from phone"),
+            // ),
+            // ElevatedButton(
+            //   onPressed: () async {
+            //     sendFile(false);
+            //   },
+            //   child: const Text("send File"),
+            // ),
           ],
         ),
       ),

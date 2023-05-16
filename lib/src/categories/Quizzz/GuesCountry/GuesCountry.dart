@@ -25,8 +25,9 @@ late Future<List<Country>> countries;
   Widget build(BuildContext context) {
     const title='GuesCountry ';
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
           onPressed: () => context.go("/categories"),
@@ -37,16 +38,8 @@ late Future<List<Country>> countries;
       //create a Grid of two row and 6 columns
       body: Container(
          decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topRight,
-                    end: Alignment.bottomLeft,
-                    colors: [
-                  Colors.purple.shade800,
-                  Colors.purple.shade700,
-                  Colors.purple.shade600,
-                  Colors.purple.shade500,
-                  Colors.purple.shade400,
-                ])),
+           image: DecorationImage(image: AssetImage('assets/images/countriesback2.jpg'), fit: BoxFit.cover, opacity:100)
+              ),
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Center(
@@ -63,7 +56,7 @@ late Future<List<Country>> countries;
                             margin: const EdgeInsets.all(10),
                             height: 60,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: Colors.transparent,
                               border: Border.all(width: 3),
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(10)),
@@ -71,7 +64,24 @@ late Future<List<Country>> countries;
                             width: MediaQuery.of(context).size.width,
                             child: const Center(
                               child:
-                                  Text('Level 1', style: TextStyle(fontSize: 20)),
+                                  Text(' level 1', style: TextStyle(fontSize: 20)),
+                            ))),
+
+                             GestureDetector(
+                          onTap:  () {context.goNamed("levelTwo",extra:snapshot.data! );},
+                          child : Container(
+                            margin: const EdgeInsets.all(10),
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              border: Border.all(width: 3),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10)),
+                            ),
+                            width: MediaQuery.of(context).size.width,
+                            child: const Center(
+                              child:
+                                  Text('Level 2', style: TextStyle(fontSize: 20)),
                             ))),
                   ],  
                   );

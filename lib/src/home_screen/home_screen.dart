@@ -31,17 +31,26 @@ class HomeScreen extends StatelessWidget {
             children: <Widget>[
                Padding(
                  padding: const EdgeInsets.all(20.0),
-                 child: TextField(
-                    controller: playerName,
-                    decoration: const InputDecoration(
-                     border: OutlineInputBorder(
-                      borderSide: BorderSide(width: 5, color: Colors.black),
-                      borderRadius: BorderRadius.all(Radius.circular(15))
-                     ),
-                     hintText:'Name'
-                    ),
-                    style: const TextStyle(fontSize: 30, color: Colors.white),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+
+                    child:  Image.asset('assets/images/logo.png'),
+        //              decoration: const BoxDecoration(
+        //   image: DecorationImage(image: AssetImage('assets/images/logo.png'), fit: BoxFit.cover, opacity:100),
+
+        // ),
                   ),
+                //  child: TextField(
+                //     controller: playerName,
+                //     decoration: const InputDecoration(
+                //      border: OutlineInputBorder(
+                //       borderSide: BorderSide(width: 5, color: Colors.black),
+                //       borderRadius: BorderRadius.all(Radius.circular(15))
+                //      ),
+                //      hintText:'Name'
+                //     ),
+                //     style: const TextStyle(fontSize: 30, color: Colors.white),
+                //   ),
                ),
           
                Padding(
@@ -52,8 +61,8 @@ class HomeScreen extends StatelessWidget {
                    child: OutlinedButton(
                       onPressed: () {
                         debugPrint('you are going to play alone');
-                        context.go("/categories");
-                       // context.go("/catogories");
+                        // context.go("/categories");
+                        context.go("/challenge");
                       },
                       child:  const Text(
                         'Solo',
@@ -74,6 +83,7 @@ class HomeScreen extends StatelessWidget {
                          ),
                         onPressed: () {
                           debugPrint('you are going to play with your friend 🔥 🔥');
+                          context.go('/wifiptop');
                         },
                          child:  const Text('Multi', style: TextStyle(fontSize: 20, color: Colors.white)),
                         
@@ -87,7 +97,7 @@ class HomeScreen extends StatelessWidget {
                       width: MediaQuery.of(context).size.width/2,
                     height: 50,
                         child: OutlinedButton(
-                          onPressed: () {},
+                          onPressed: () {context.go('/categories');},
                          child:  const Text('Train',
                          style: TextStyle(fontSize: 20, color: Colors.white),
                          )

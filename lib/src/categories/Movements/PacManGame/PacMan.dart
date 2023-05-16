@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:projet_progm/src/categories/Movements/pacManGame/path.dart';
 import 'package:projet_progm/src/categories/Movements/pacManGame/pixel.dart';
 import 'package:projet_progm/src/categories/Movements/pacManGame/player.dart';
@@ -21,6 +23,7 @@ class _PacManScreenState extends State<PacManScreen> {
   Timer? countdownTimer;
 
   Duration myDuration = const Duration(seconds: 60);
+  final myaudioplayer= AudioPlayer();
 
   List<int> barriers = [
     0,
@@ -132,34 +135,79 @@ class _PacManScreenState extends State<PacManScreen> {
   String direction = "right";
   int score = 0;
 
-  int _seconds = 20;
+  int _seconds = 30;
 
   void startTimer() {
-    countdownTimer = Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {
+    countdownTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+       setState(() {
         if (_seconds > 0) {
           _seconds--;
+        }
+        else{
+          timer.cancel();
         }
       });
     });
   }
 
-// void stopTimer(){
-//  countdownTimer?.cancel();
-// }
+
+void _showDialog(){
+  showDialog(context: context,
+   builder: (BuildContext context){
+    return  AlertDialog(
+      backgroundColor: Colors.blueGrey,
+      title: const Text("Time up ", style: TextStyle(color: Colors.white),),
+      content: Text("score : $score", style: const TextStyle(color: Colors.white, fontSize: 25)),
+      actions: [
+       TextButton(
+              onPressed: () => resetGame(),
+              child: const Text('R E S T A R T'),
+            ),
+      ],
+    );
+   }
+   
+      
+   );
+   
+   myaudioplayer.play(AssetSource('audios/background.wav'));
+   Timer(const Duration(seconds: 2), () {
+
+    if(food.isEmpty){
+      context.go('/challenge');
+    }
+    context.go('/randomQuiz');
+   } );
+}
+
+
+void resetGame(){
+  setState(() {
+    Navigator.pop(context); //dismiss
+    score=0;
+    _seconds = 30;
+   player = numberInRow * 14 + 1;
+   direction = "right";
+   startGame();
+  });
+
+}
 
   void startGame() {
     preGame = false;
     getFood();
     startTimer();
     Timer.periodic(const Duration(milliseconds: 400), (timer) {
-      if (_seconds == 0) {
-        print("End of This Game");
-        //  stopTimer();
+     if (_seconds == 0) {
+        timer.cancel();
+        _showDialog();
+        // audioplayer.stop();
+       
       }
 
       if (food.contains(player)) {
         food.remove(player);
+        myaudioplayer.play(AssetSource('audios/background.wav'));
         score++;
       }
       switch (direction) {
@@ -234,6 +282,20 @@ class _PacManScreenState extends State<PacManScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                      GestureDetector(
+                onTap: () => context.go('/challenge'),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    color: Colors.grey[100],
+                    width: 40,
+                    height: 40,
+                    child: const Center(
+                      child: Icon(Icons.arrow_back_ios, size: 30,),
+                    ),
+                  ),
+                ),
+              ),
                   Text(
                     "score: $score",
                     style: const TextStyle(color: Colors.white, fontSize: 20),
@@ -317,12 +379,12 @@ class _PacManScreenState extends State<PacManScreen> {
                               // child: Text(index.toString())
                             );
                           } else if (food.contains(index) || preGame) {
-                            return MyPath(
+                            return const MyPath(
                                 innerColor: Color.fromARGB(255, 241, 243, 242),
                                 outerColor: Colors.blueGrey,
-                                child : Image.asset('assets/images/strawberry.png'),
-                                // child: Icon(Icons.apple,
-                                    // size: 25, color: Colors.grey)
+                                // child : Image.asset('assets/images/strawberry.png'),
+                                child: Icon(Icons.apple,
+                                    size: 25, color: Colors.grey)
                                     );
                           } else {
                             return const MyPath(

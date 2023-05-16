@@ -14,8 +14,8 @@ class Target extends StatelessWidget{
     return Container(
       alignment: Alignment(targetX,targetY),
       child: Container(
-          width: 30,
-          height: 30,
+          width: 40,
+          height: 40,
           decoration: BoxDecoration(shape: BoxShape.circle, color: color),
     
       ),

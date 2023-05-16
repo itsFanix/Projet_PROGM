@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
-import 'package:projet_progm/src/categories/Movements/pacManGame/PacMan.dart';
-import 'package:projet_progm/src/categories/Movements/movement_screen.dart';
+import 'package:projet_progm/src/categories/Quizzz/generalQuestion/randomQuiz.dart';
 import 'package:projet_progm/src/categories/Quizzz/guesCountry/GuesCountry.dart';
+import 'package:projet_progm/src/categories/Quizzz/guesCountry/LevelOne/LevelOneGuesCountry.dart';
+import 'package:projet_progm/src/categories/Quizzz/guesCountry/LevelTwo/guestCapital.dart';
 import 'package:projet_progm/src/categories/Quizzz/guesCountry/country_model.dart';
 import 'package:projet_progm/src/categories/Quizzz/guesCountry/endGame.dart';
 import 'package:projet_progm/src/categories/Quizzz/guesMusic/GuesMusic.dart';
 import 'package:projet_progm/src/categories/Quizzz/quizz_screen.dart';
 import 'package:projet_progm/src/categories/categories_screen.dart';
-import 'package:projet_progm/src/categories/Quizzz/guesCountry/LevelOne/LevelOneGuesCountry.dart';
 import 'package:projet_progm/src/categories/movements/bubbleGame/BubbleGame.dart';
 import 'package:projet_progm/src/categories/movements/collectFruits/CollectFruits.dart';
-import 'package:projet_progm/src/categories/sensors/ballMov.dart/MoveBall.dart';
-import 'package:projet_progm/src/categories/sensors/ballMov.dart/MoveBallTwo.dart';
+import 'package:projet_progm/src/categories/movements/movement_screen.dart';
+import 'package:projet_progm/src/categories/movements/pacManGame/PacMan.dart';
 import 'package:projet_progm/src/categories/sensors/ballMov.dart/SuperBall.dart';
 import 'package:projet_progm/src/categories/sensors/sensors_screen.dart';
+
 import 'package:projet_progm/src/home_screen/home_screen.dart';
+import 'package:projet_progm/src/home_screen/startGame.dart';
+import 'package:projet_progm/src/multiPlayer/wifiptop.dart';
 import 'package:projet_progm/src/multiPlayer/wifiptop_screen.dart';
 
 void main() {
@@ -38,15 +41,27 @@ Logger _log = Logger('main.dart');
 final GoRouter _router = GoRouter(routes: <RouteBase>[
   GoRoute(
     path: "/",
-        //  builder: (BuildContext context, GoRouterState state) => const HomeWifiPtoP(),
-    // builder: (BuildContext context, GoRouterState state) => const HomeScreen(),
-builder: (BuildContext context, GoRouterState state) => const SuperBall(),
+          // builder: (BuildContext context, GoRouterState state) => const HomeWifiPtoP(),
+   builder: (BuildContext context, GoRouterState state) => const HomeScreen(),
+  //  builder: (BuildContext context, GoRouterState state) => GuesMusic(),
+//builder: (BuildContext context, GoRouterState state) => const SuperBall(),
 
   ),
   GoRoute(
     path: "/categories",
     builder: (BuildContext context, GoRouterState state) =>
         const CategoriesScreen(),
+  ), GoRoute(
+    path: "/challenge",
+    builder: (BuildContext context, GoRouterState state) =>
+        const StartChallenge(),
+  
+  
+  
+  ),
+ GoRoute(
+    path: "/wifiptop",
+      builder: (BuildContext context, GoRouterState state) => const HomeWifiPtoP(),
   ),
     GoRoute(
     name : "quiz",
@@ -61,11 +76,22 @@ builder: (BuildContext context, GoRouterState state) => const SuperBall(),
     path: "/guesMusic",
     builder: (BuildContext context, GoRouterState state) => GuesMusic(),
   ),
+    GoRoute(
+    path: "/randomQuiz",
+    builder: (BuildContext context, GoRouterState state) => const RandomQuiz(),
+  ),
   GoRoute(
       name: "levelOneGuesCountry",
       path: "/levelOneGuesCountry",
       builder: (BuildContext context, GoRouterState state) =>
           LevelOneGuesCountry(countries: state.extra as List<Country>)),
+
+
+          GoRoute(
+      name: "leveltwo",
+      path: "/guesCapital",
+      builder: (BuildContext context, GoRouterState state) =>
+          GuesCapital(countries: state.extra as List<Country>)),
   GoRoute(
       name: "endGame",
       path: "/endGame",

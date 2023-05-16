@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:projet_progm/src/categories/movements/collectFruits/Basket.dart';
 import 'package:projet_progm/src/categories/movements/collectFruits/Fruit.dart';
 
+
 class CollectFruits extends StatefulWidget {
   const CollectFruits({super.key});
 
@@ -46,7 +47,7 @@ class _CollectFruitsState extends State<CollectFruits> {
    builder: (BuildContext context){
     return  AlertDialog(
       backgroundColor: Colors.blueGrey,
-      title: const Text("Loose ☹", style: TextStyle(color: Colors.white),),
+      title: const Text("END ☹", style: TextStyle(color: Colors.white),),
       content: Text("score : $score", style: const TextStyle(color: Colors.white, fontSize: 25)),
       actions: [
        TextButton(
@@ -58,6 +59,10 @@ class _CollectFruitsState extends State<CollectFruits> {
    }
    
    );
+
+      Timer(const Duration(seconds: 2), () {
+context.go('/moveBall');
+   } );
  
 }
 
@@ -178,7 +183,7 @@ if( distance.abs() <0.1 && fruitY > 0.85){
             children: [
               //back to the menu
               GestureDetector(
-                onTap: () => context.go('/movement'),
+                onTap: () => context.go('/challenge'),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
