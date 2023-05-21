@@ -1,21 +1,19 @@
-# projet_progm
+# Mobile programming  Project 
+
+For our final school projet 
 
 A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
 
-Link of the images
+
+
+
+
 - (https://www.pinterest.fr/pin/1407443626689915/)
 - (https://pixabay.com/fr/sound-effects/search/piano/)
 - (https://www.pinterest.fr/pin/752171575287445749/)

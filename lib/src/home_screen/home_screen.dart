@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
                   child: Container(
                     width: MediaQuery.of(context).size.width,
 
-                    child:  Image.asset('assets/images/logo.png'),
+                    // child:  Image.asset('assets/images/logo.png'),
         //              decoration: const BoxDecoration(
         //   image: DecorationImage(image: AssetImage('assets/images/logo.png'), fit: BoxFit.cover, opacity:100),
 

@@ -127,7 +127,6 @@ void addFruit(){
 }
   bool collision(){
     var distance= fruitX - basketX;
-     print(distance.toString());
 if( distance.abs() <0.1 && fruitY > 0.85){
     return true;
     }
@@ -138,84 +137,86 @@ if( distance.abs() <0.1 && fruitY > 0.85){
   }
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-            flex: 4,
-            child: Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/images/fruitGame.jpg'),
-                    fit: BoxFit.cover,
-                    opacity: 100),
-              ),
-
-
-              child: Stack(children: [
-                GestureDetector(
-                  onHorizontalDragUpdate:  (details) {
-                    if(details.delta.dx > 0){
-                      moveToRight();
-
-                    }
-                    else if(details.delta.dx <0){
-                      moveToLeft();
-                    }
-                  },
-                  
-                  
-                  child: Basket(basketX: basketX,)),
-
-
-              
-                     MyFruit(fruitX:  fruitX, fruitY: fruitY,),
-                      
+    return Scaffold(
+      body: Column(
+        children: [
+          Expanded(
+              flex: 4,
+              child: Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/images/fruitGame.jpg'),
+                      fit: BoxFit.cover,
+                      opacity: 100),
+                ),
+    
+    
+                child: Stack(children: [
+                  GestureDetector(
+                    onHorizontalDragUpdate:  (details) {
+                      if(details.delta.dx > 0){
+                        moveToRight();
+    
+                      }
+                      else if(details.delta.dx <0){
+                        moveToLeft();
+                      }
+                    },
                     
+                    
+                    child: Basket(basketX: basketX,)),
+    
+    
                 
-
-              ],)
-            )),
-        Expanded(
-            child: Container(
-          color: Colors.blueGrey,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              //back to the menu
-              GestureDetector(
-                onTap: () => context.go('/challenge'),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    color: Colors.grey[100],
-                    width: 40,
-                    height: 40,
-                    child: const Center(
-                      child: Icon(Icons.arrow_back_ios, size: 30,),
+                       MyFruit(fruitX:  fruitX, fruitY: fruitY,),
+                        
+                      
+                  
+    
+                ],)
+              )),
+          Expanded(
+              child: Container(
+            color: Colors.blueGrey,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                //back to the menu
+                GestureDetector(
+                  onTap: () => context.go('/challenge'),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                      color: Colors.grey[100],
+                      width: 40,
+                      height: 40,
+                      child: const Center(
+                        child: Icon(Icons.arrow_back_ios, size: 30,),
+                      ),
                     ),
                   ),
                 ),
-              ),
-
-              GestureDetector(
-                  onTap: startGame,
-                  child: const Text(
-                    "PLAY",
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  )),
-
-              Row(
-                children: [
-                  Text(
-                    "score: $score",
-                    style: const TextStyle(color: Colors.white, fontSize: 20),
-                  )
-                ],
-              )
-            ],
-          ),
-        ))
-      ],
+    
+                GestureDetector(
+                    onTap: startGame,
+                    child: const Text(
+                      "PLAY",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    )),
+    
+                Row(
+                  children: [
+                    Text(
+                      "score: $score",
+                      style: const TextStyle(color: Colors.white, fontSize: 20),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ))
+        ],
+      ),
     );
   }
 }

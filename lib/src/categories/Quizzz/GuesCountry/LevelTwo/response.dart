@@ -42,7 +42,7 @@ class _ResponseCapitalState extends State<ResponseCapital> {
        
        
       } else {
-         myaudioplayer.play(AssetSource('audios/wrong_answer_buz.wav'));
+         myaudioplayer.play(AssetSource('audios/wrong_answer_buzz.wav'));
         widget.updateLive();
         containerColor = Colors.red.shade600;
       }

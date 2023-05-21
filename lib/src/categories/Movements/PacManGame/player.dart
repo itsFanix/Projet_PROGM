@@ -9,7 +9,7 @@ class MyPlayer extends StatelessWidget{
     return const Padding(
       padding: EdgeInsets.all(1.0),
       child: CircleAvatar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         child:  Icon(  Icons.android, size: 30, color: Colors.greenAccent,),
       ),
     );

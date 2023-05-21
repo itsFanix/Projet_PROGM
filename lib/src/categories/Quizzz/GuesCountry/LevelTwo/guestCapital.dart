@@ -133,106 +133,111 @@ void resetGame(){
 total = widget.countries.length;
     
 
-    return Column(
-      children: [
-        Expanded(
+    return Scaffold(
+      body: Column(
 
-          child: Container (
-                    alignment: Alignment.center,
-                     color: Colors.blueGrey,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              //back to the menu
-              GestureDetector(
-                onTap: () => context.go('/challenge'),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: const Center(
-                    child: Icon(Icons.arrow_back_ios, size: 30, color: Colors.white,),
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+    
+            child: Container (
+                      alignment: Alignment.center,
+                       color: Colors.blueGrey,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                //back to the menu
+                GestureDetector(
+                  onTap: () => context.go('/challenge'),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: const Center(
+                      child: Icon(Icons.arrow_back_ios, size: 30, color: Colors.white,),
+                    ),
                   ),
                 ),
-              ),
-
-              // GestureDetector(
-              //     onTap: startGame,
-              //     child: const Text(
-              //       "PLAY",
-              //       style: TextStyle(color: Colors.white, fontSize: 20),
-              //     )),
-
-              Row(
+    
+                // GestureDetector(
+                //     onTap: startGame,
+                //     child: const Text(
+                //       "PLAY",
+                //       style: TextStyle(color: Colors.white, fontSize: 20),
+                //     )),
+    
+                Row(
+                  children: [
+                    Text(
+                      "score: $score",
+                      style: const TextStyle(color: Colors.white, fontSize: 20),
+                    )
+                  ],
+                ),
+                Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [for (var live in lives) live],
+              )
+              ],
+            ),
+    
+    
+            )),
+          Expanded(
+            flex: 7,
+            
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+               decoration: BoxDecoration(
+                 image: DecorationImage(image: AssetImage('assets/images/capitalCountries.jpg'), fit: BoxFit.cover),
+                
+                
+               ),
+               child: Column(children: [
+    
+                
+                Row(
+                mainAxisAlignment : MainAxisAlignment.spaceAround,
                 children: [
-                  Text(
-                    "score: $score",
-                    style: const TextStyle(color: Colors.white, fontSize: 20),
-                  )
+                  ResponseCapital(
+                    responsedata: myList[2],
+                    realresponse: current,
+                    updateScore: updateScore,
+                    updateLive: updateLive,
+                  ),
+                  // _buildDecoratedResponse(myList[2].name),
+                  ResponseCapital(
+                    responsedata: myList[3],
+                    realresponse: current,
+                    updateScore: updateScore,
+                    updateLive: updateLive,
+                  ),
                 ],
               ),
-              Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [for (var live in lives) live],
-            )
-            ],
-          ),
-
-
-          )),
-        Expanded(
-          flex: 7,
-          
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-             decoration: BoxDecoration(
-               image: DecorationImage(image: AssetImage('assets/images/capitalCountries.jpg'), fit: BoxFit.cover),
+    
+               Row(
+                children: [
+                  ResponseCapital(
+                    responsedata: myList[0],
+                    realresponse: current,
+                    updateScore: updateScore,
+                    updateLive: updateLive,
+                  ),
+                  ResponseCapital(
+                    responsedata: myList[1],
+                    realresponse: current,
+                    updateScore: updateScore,
+                    updateLive: updateLive,
+                  ),
+                ],
+              ),
+               
+               _buildTheContainer(),
+    
+    
+               ],)
               
-              
-             ),
-             child: Column(children: [
-
-
-              Row(
-              children: [
-                ResponseCapital(
-                  responsedata: myList[2],
-                  realresponse: current,
-                  updateScore: updateScore,
-                  updateLive: updateLive,
-                ),
-                // _buildDecoratedResponse(myList[2].name),
-                ResponseCapital(
-                  responsedata: myList[3],
-                  realresponse: current,
-                  updateScore: updateScore,
-                  updateLive: updateLive,
-                ),
-              ],
-            ),
-
-             Row(
-              children: [
-                ResponseCapital(
-                  responsedata: myList[0],
-                  realresponse: current,
-                  updateScore: updateScore,
-                  updateLive: updateLive,
-                ),
-                ResponseCapital(
-                  responsedata: myList[1],
-                  realresponse: current,
-                  updateScore: updateScore,
-                  updateLive: updateLive,
-                ),
-              ],
-            ),
-             
-             _buildTheContainer(),
-
-
-             ],)
-            
-          ))
-      ],
+            ))
+        ],
+      ),
     );
     
   

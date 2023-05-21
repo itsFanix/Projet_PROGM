@@ -194,6 +194,8 @@ void resetGame(){
 }
 
   void startGame() {
+
+    myaudioplayer.play(AssetSource('audios/gameSong.mp3'));
     preGame = false;
     getFood();
     startTimer();
@@ -207,7 +209,7 @@ void resetGame(){
 
       if (food.contains(player)) {
         food.remove(player);
-        myaudioplayer.play(AssetSource('audios/background.wav'));
+        
         score++;
       }
       switch (direction) {

@@ -40,7 +40,7 @@ class _ResponseWidgetState extends State<ResponseWidget> {
         containerColor = Colors.green.shade900;
        
       } else {
-         myaudioplayer.play(AssetSource('audios/wrong_answer_buz.wav'));
+         myaudioplayer.play(AssetSource('audios/wrong_answer_buzz.wav'));
         // myaudioplayer.stop();
         widget.updateLive();
         containerColor = Colors.red.shade600;

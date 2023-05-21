@@ -118,108 +118,110 @@ void resetGame(){
     total = widget.countries.length;
        List<Country> myList = chooseCountry(widget.countries);
     current = randomChoice(myList);
-    return Column(
-      children: [
-        Expanded(
-
-          child: Container (
-                    alignment: Alignment.center,
-                     color: Colors.blueGrey,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              //back to the menu
-              GestureDetector(
-                onTap: () => context.go('/challenge'),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: const Center(
-                    child: Icon(Icons.arrow_back_ios, size: 30, color: Colors.white,),
+    return Scaffold(
+      body: Column(
+        children: [
+          Expanded(
+    
+            child: Container (
+                      alignment: Alignment.center,
+                       color: Colors.blueGrey,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                //back to the menu
+                GestureDetector(
+                  onTap: () => context.go('/challenge'),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: const Center(
+                      child: Icon(Icons.arrow_back_ios, size: 30, color: Colors.white,),
+                    ),
                   ),
                 ),
-              ),
-
-              // GestureDetector(
-              //     onTap: startGame,
-              //     child: const Text(
-              //       "PLAY",
-              //       style: TextStyle(color: Colors.white, fontSize: 20),
-              //     )),
-
-              Row(
+    
+                // GestureDetector(
+                //     onTap: startGame,
+                //     child: const Text(
+                //       "PLAY",
+                //       style: TextStyle(color: Colors.white, fontSize: 20),
+                //     )),
+    
+                Row(
+                  children: [
+                    Text(
+                      "score: $score",
+                      style: const TextStyle(color: Colors.white, fontSize: 20),
+                    )
+                  ],
+                ),
+                Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [for (var live in lives) live],
+              )
+              ],
+            ),
+    
+    
+            )),
+          Expanded(
+            flex: 7,
+            
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+               decoration: BoxDecoration(
+                 image: DecorationImage(image: AssetImage('assets/images/capitalCountries.jpg'), fit: BoxFit.cover),
+                
+                
+               ),
+               child: Column(children: [
+    
+                _buildFlagContainer(),
+    
+    
+                Row(
                 children: [
-                  Text(
-                    "score: $score",
-                    style: const TextStyle(color: Colors.white, fontSize: 20),
-                  )
+                  ResponseWidget(
+                    responsedata: myList[2].name,
+                    realresponse: current.name,
+                    updateScore: updateScore,
+                    updateLive: updateLive,
+                  ),
+                  // _buildDecoratedResponse(myList[2].name),
+                  ResponseWidget(
+                    responsedata: myList[3].name,
+                    realresponse: current.name,
+                    updateScore: updateScore,
+                    updateLive: updateLive,
+                  ),
                 ],
               ),
-              Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [for (var live in lives) live],
-            )
-            ],
-          ),
-
-
-          )),
-        Expanded(
-          flex: 7,
-          
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-             decoration: BoxDecoration(
-               image: DecorationImage(image: AssetImage('assets/images/capitalCountries.jpg'), fit: BoxFit.cover),
+    
+               Row(
+                children: [
+                  ResponseWidget(
+                    responsedata: myList[0].name,
+                    realresponse: current.name,
+                    updateScore: updateScore,
+                    updateLive: updateLive,
+                  ),
+                  ResponseWidget(
+                    responsedata: myList[1].name,
+                    realresponse: current.name,
+                    updateScore: updateScore,
+                    updateLive: updateLive,
+                  ),
+                ],
+              ),
+               
+               
+    
+    
+               ],)
               
-              
-             ),
-             child: Column(children: [
-
-              _buildFlagContainer(),
-
-
-              Row(
-              children: [
-                ResponseWidget(
-                  responsedata: myList[2].name,
-                  realresponse: current.name,
-                  updateScore: updateScore,
-                  updateLive: updateLive,
-                ),
-                // _buildDecoratedResponse(myList[2].name),
-                ResponseWidget(
-                  responsedata: myList[3].name,
-                  realresponse: current.name,
-                  updateScore: updateScore,
-                  updateLive: updateLive,
-                ),
-              ],
-            ),
-
-             Row(
-              children: [
-                ResponseWidget(
-                  responsedata: myList[0].name,
-                  realresponse: current.name,
-                  updateScore: updateScore,
-                  updateLive: updateLive,
-                ),
-                ResponseWidget(
-                  responsedata: myList[1].name,
-                  realresponse: current.name,
-                  updateScore: updateScore,
-                  updateLive: updateLive,
-                ),
-              ],
-            ),
-             
-             
-
-
-             ],)
-            
-          ))
-      ],
+            ))
+        ],
+      ),
     );
     
   

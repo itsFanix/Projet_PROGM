@@ -40,8 +40,8 @@ moveball(AccelerometerEvent event){
     return;
   }
   setState(() {
-     var reduisX = event.x/100;
-     var reduisY= event.y/100;
+     var reduisX = event.x/60;
+     var reduisY= event.y/60;
      var  resX= posX + reduisX;
      var resY= posY + reduisY;
 
@@ -52,9 +52,7 @@ moveball(AccelerometerEvent event){
        posY = resY;
     }
 
-   
   });
-
 
 }
   void startGame() {
@@ -76,32 +74,33 @@ startTimer();
   Timer.periodic(const Duration(milliseconds: 200), (timer){
     moveball(event!);
     touchTarget();
+    if(touchTarget()){
+       score ++;
+       updateTargert();
+    }
       if (_seconds == 0) {
         timer.cancel();
         _showDialog();
         audioplayer.stop();
-       
       }
   
   }
   
   );
-
-
   }
 
-  void touchTarget(){
-    if((posX - targetX)< 0.02 && (posY -targetY) <0.02){
-      print("yes");
-       targetX= Random().nextDouble() * 2 - 1;
-   targetY= Random().nextDouble() * 2 - 1;
-   score ++;
-
-     
-    }
+ bool touchTarget(){   
+  if((posX - targetX)< 0.02 && (posY -targetY) <0.02){
+      return true;
+    } 
+    return  false;
   }
 
-    
+  void updateTargert(){
+     score ++;
+      targetX= Random().nextDouble() * 2 - 1;
+        targetY= Random().nextDouble() * 2 - 1;
+  }
 
   void startTimer() {
     countdownTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -115,11 +114,6 @@ startTimer();
       });
     });
   }
-@override
-void initState() {
-    
-    super.initState();
-  }
 
 void resetGame(){
   setState(() {
@@ -128,13 +122,10 @@ void resetGame(){
     _seconds = 30;
     posX= Random().nextDouble() * 2 - 1;
     posY= Random().nextDouble() * 2 - 1;
-       targetX= Random().nextDouble() * 2 - 1;
+    targetX= Random().nextDouble() * 2 - 1;
    targetY= Random().nextDouble() * 2 - 1;
-
   });
-
 }
-
 void _showDialog(){
   showDialog(context: context,
    builder: (BuildContext context){
@@ -166,87 +157,79 @@ context.go('/bubble');
   @override
   Widget build(BuildContext context) {
     
-    return Column(children: [
-
-      Expanded(child: Container(
-        color: Colors.blueGrey,
-        child: Row(            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              //back to the menu
-              GestureDetector(
-                onTap: () => context.go('/challenge'),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    color: Colors.grey[100],
-                    width: 40,
-                    height: 40,
-                    child: const Center(
-                      child: Icon(Icons.arrow_back_ios, size: 30,),
+    return Scaffold(
+      body: Column(children: [
+    
+        Expanded(child: Container(
+          color: Colors.blueGrey,
+          child: Row(            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                //back to the menu
+                GestureDetector(
+                  onTap: () => context.go('/challenge'),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                      color: Colors.grey[100],
+                      width: 40,
+                      height: 40,
+                      child: const Center(
+                        child: Icon(Icons.arrow_back_ios, size: 30,),
+                      ),
                     ),
                   ),
                 ),
-              ),
-
-              GestureDetector(
-                  onTap: startGame,
-                  child: const Text(
-                    "PLAY",
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  )),
-
-                    Row(
-                    children: [
-                      const Icon(
-                        Icons.access_time,
-                        color: Colors.white,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          _seconds.toString(),
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
+                GestureDetector(
+                    onTap: startGame,
+                    child: const Text(
+                      "PLAY",
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    )),
+                      Row(
+                      children: [
+                        const Icon(
+                          Icons.access_time,
+                          color: Colors.white,
                         ),
-                      ),
-                    ],
-                  ),
-
-              Row(
-                children: [
-                  Text(
-                    "score: $score",
-                    style: const TextStyle(color: Colors.white, fontSize: 20),
-                  )
-                ],
-              ),
-
-             
-            ],),
-
-      )),
-
-      Expanded(
-        flex: 3,
-        child: Container(
-         decoration: const BoxDecoration(
-          image: DecorationImage(image: AssetImage('assets/images/paysage2.jpg'), fit: BoxFit.cover, opacity:100),
-         ),
-          child: Stack(
-            children: [
-               Target(targetX: targetX, targetY: targetY, color: Colors.amberAccent),
-              Player(posX: posX, posY: posY),
-            
-            ],
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            _seconds.toString(),
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20),
+                          ),
+                        ),
+                      ],
+                    ),
+                Row(
+                  children: [
+                    Text(
+                      "score: $score",
+                      style: const TextStyle(color: Colors.white, fontSize: 20),
+                    )
+                  ],
+                ),             
+              ],),
+        )),
+        Expanded(
+          flex: 3,
+          child: Container(
+           decoration: const BoxDecoration(
+            image: DecorationImage(image: AssetImage('assets/images/paysage2.jpg'), fit: BoxFit.cover, opacity:100),
+           ),
+            child: Stack(
+              children: [
+                 Target(targetX: targetX, targetY: targetY, color: Colors.amberAccent),
+                Player(posX: posX, posY: posY),
+              
+              ],
+            ),
           ),
-        ),
-      )
-
-      
-
-    ],);
+        )
+      ],),
+    );
 
   }
 }

@@ -77,28 +77,16 @@ class SensorsScreen extends StatelessWidget {
                           margin: const EdgeInsets.all(25),
                           height: MediaQuery.of(context).size.height / 7,
                           decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                                begin: Alignment.topRight,
-                                end: Alignment.bottomLeft,
-                                colors: [
-                                  const Color.fromARGB(255, 163, 143, 143)
-                                      .withBlue(25),
-                                  const Color.fromARGB(255, 62, 199, 204),
-                                  Colors.white.withBlue(5),
-                                  const Color.fromARGB(255, 53, 155, 185)
-                                      .withBlue(25),
-                                  const Color.fromARGB(255, 131, 86, 86)
-                                      .withBlue(25),
-                                ]),
                             border: Border.all(width: 3),
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(10)),
                           ),
                           width: MediaQuery.of(context).size.width,
-                          child: const Center(
-                            child:
-                                Text('Start', style: TextStyle(fontSize: 30)),
-                          ))),
+                          // child: const Center(
+                          //   child:
+                          //       Text('Start', style: TextStyle(fontSize: 30)),
+                          // )
+                          )),
                 ],
               ),
             )));

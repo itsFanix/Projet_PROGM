@@ -20,7 +20,6 @@ class _RandomQuizState extends State<RandomQuiz> {
   late List<Quiz> myQuiz;
 
   int score = 0;
-  int _seconds = 60;
   int questiontotal = 20;
   int etape = 0;
   int nbCorrect= 0;
@@ -94,7 +93,6 @@ class _RandomQuizState extends State<RandomQuiz> {
     setState(() {
       Navigator.pop(context); //dismiss
       score = 0;
-      _seconds = 60;
       etape = 0;
       nbCorrect=0;
 
@@ -106,14 +104,14 @@ class _RandomQuizState extends State<RandomQuiz> {
     if (answer) {
       setState(() {
         myaudioplayer.play(AssetSource('audios/correct_answer.wav'));
-        myaudioplayer.stop();
+        //myaudioplayer.stop();
         score+=10;
         nbCorrect +=1;
       });
     } else {
       setState(() {
-        myaudioplayer.play(AssetSource('audios/wrong_answer_buz.wav'));
-        myaudioplayer.stop();
+        myaudioplayer.play(AssetSource('audios/wrong_answer_buzz.wav'));
+        //myaudioplayer.stop();
         score -= 2;
       });
     }
@@ -132,93 +130,95 @@ class _RandomQuizState extends State<RandomQuiz> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-            child: Container(
-          alignment: Alignment.center,
-          color: Colors.blueGrey,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              //back to the menu
-              GestureDetector(
-                onTap: () => context.go('/challenge'),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: const Center(
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      size: 30,
-                      color: Colors.white,
+    return Scaffold(
+      body: Column(
+        children: [
+          Expanded(
+              child: Container(
+            alignment: Alignment.center,
+            color: Colors.blueGrey,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                //back to the menu
+                GestureDetector(
+                  onTap: () => context.go('/challenge'),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: const Center(
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        size: 30,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
-              ),
-
-              Text(
-                "Quiz: ${etape+1} ",
-                style: const TextStyle(color: Colors.white, fontSize: 20),
-              ),
-              // Row(
-              //   children: [
-              //     const Icon(
-              //       Icons.access_time,
-              //       color: Colors.white,
-              //     ),
-              //     Padding(
-              //       padding: const EdgeInsets.all(8.0),
-              //       child: Text(
-              //         _seconds.toString(),
-              //         style: const TextStyle(
-              //             color: Colors.white,
-              //             fontWeight: FontWeight.bold,
-              //             fontSize: 20),
-              //       ),
-              //     ),
-              //   ],
-              // ),
-
-              Row(
-                children: [
-                  Text(
-                    "score: $score",
-                    style: const TextStyle(color: Colors.white, fontSize: 20),
-                  )
-                ],
-              ),
-            ],
-          ),
-        )),
-        Expanded(
-            flex: 7,
-            child: FutureBuilder<List<Quiz>>(
-              future: quiz,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  myQuiz = snapshot.data!;
-                  print(myQuiz[0].options);
-                  return Container(
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/images/quiZBack2.jpg'),
-                            fit: BoxFit.cover),
-                      ),
-                      child: Column(
-                        children: [
-                          _buildTheContainer(),
-                          _buildTheResponseContainer()
-                        ],
-                      ));
-                } else {
-                return  const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              },
-            ))
-      ],
+    
+                Text(
+                  "Quiz: ${etape+1} ",
+                  style: const TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                // Row(
+                //   children: [
+                //     const Icon(
+                //       Icons.access_time,
+                //       color: Colors.white,
+                //     ),
+                //     Padding(
+                //       padding: const EdgeInsets.all(8.0),
+                //       child: Text(
+                //         _seconds.toString(),
+                //         style: const TextStyle(
+                //             color: Colors.white,
+                //             fontWeight: FontWeight.bold,
+                //             fontSize: 20),
+                //       ),
+                //     ),
+                //   ],
+                // ),
+    
+                Row(
+                  children: [
+                    Text(
+                      "score: $score",
+                      style: const TextStyle(color: Colors.white, fontSize: 20),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          )),
+          Expanded(
+              flex: 7,
+              child: FutureBuilder<List<Quiz>>(
+                future: quiz,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    myQuiz = snapshot.data!;
+                    print(myQuiz[0].options);
+                    return Container(
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage('assets/images/quiZBack2.jpg'),
+                              fit: BoxFit.cover),
+                        ),
+                        child: Column(
+                          children: [
+                            _buildTheContainer(),
+                            _buildTheResponseContainer()
+                          ],
+                        ));
+                  } else {
+                  return  const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
+              ))
+        ],
+      ),
     );
   }
 
